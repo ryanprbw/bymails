@@ -200,6 +200,11 @@
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Log Out') }}
                                 </a>
+                                <a href="{{ route('register') }}"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Register') }}
+                                </a>
 
                                 <!-- Form logout yang tersembunyi -->
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
