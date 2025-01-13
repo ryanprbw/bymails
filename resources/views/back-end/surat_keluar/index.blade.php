@@ -36,7 +36,24 @@
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 animate-pulse hover:animate-bounce">
                     Tambah Surat Keluar
                 </a>
-
+                <form method="GET" action="{{ url()->current() }}" class="flex items-center space-x-4">
+                    <label for="per_page" class="text-sm font-medium text-gray-700">Surat per Halaman :</label>
+                    <div class="relative">
+                        <select 
+                            name="per_page" 
+                            id="per_page" 
+                            onchange="this.form.submit()" 
+                            class="block w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        >
+                            <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
+                            <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
+                            <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
+                            <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
+                        </select>
+                    </div>
+                </form>
+                
+                                
                 <form method="GET" action="{{ route('surat_keluar.index') }}" class="flex items-center">
                     <input type="text" name="search"
                         class="px-4 py-2 border rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300"
@@ -54,7 +71,7 @@
                                 Nomor Urut
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Nomor Berkas
+                                Kode Nomor Berkas
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Alamat Penerima

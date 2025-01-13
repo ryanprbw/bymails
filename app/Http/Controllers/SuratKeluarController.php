@@ -15,27 +15,29 @@ class SuratKeluarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-{
-    $query = SuratKeluar::query();
+    {
+        $query = SuratKeluar::query();
 
-    if ($request->has('search')) {
-        $search = $request->input('search');
-        $query->where(function($q) use ($search) {
-            $q->where('nomor_urut', 'like', "%{$search}%")
-            ->orWhere('nomor_berkas', 'like', "%{$search}%")
-            ->orWhere('alamat_penerima', 'like', "%{$search}%")
-            ->orWhere('tanggal', 'like', "%{$search}%")
-            ->orWhere('perihal', 'like', "%{$search}%");
-        });
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('nomor_urut', 'like', "%{$search}%")
+                    ->orWhere('nomor_berkas', 'like', "%{$search}%")
+                    ->orWhere('alamat_penerima', 'like', "%{$search}%")
+                    ->orWhere('tanggal', 'like', "%{$search}%")
+                    ->orWhere('perihal', 'like', "%{$search}%");
+            });
+        }
+
+        // Gunakan query yang sudah difilter untuk pagination
+        $role = Auth::user()->role;
+
+        $perPage = request()->input('per_page', 50);
+        $suratKeluars = $query->orderBy('nomor_urut', 'desc')->paginate($perPage);
+        $jumlahSuratKeluars = $suratKeluars->total(); // Menghitung jumlah data
+
+        return view('back-end.surat_keluar.index', compact('suratKeluars', 'jumlahSuratKeluars', 'role'));
     }
-
-    // Gunakan query yang sudah difilter untuk pagination
-    $role = Auth::user()->role;
-    $suratKeluars = $query->orderBy('nomor_urut', 'desc')->paginate(10);
-    $jumlahSuratKeluars = $suratKeluars->total(); // Menghitung jumlah data
-
-    return view('back-end.surat_keluar.index', compact('suratKeluars', 'jumlahSuratKeluars','role'));
-}
 
     /**
      * Show the form for creating a new resource.

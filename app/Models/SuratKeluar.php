@@ -15,8 +15,15 @@ class SuratKeluar extends Model
 
         // Set nomor urut sebelum membuat surat keluar baru
         static::creating(function ($model) {
-            $lastSuratKeluar = SuratKeluar::orderBy('nomor_urut', 'desc')->first();
-            $model->nomor_urut = $lastSuratKeluar ? $lastSuratKeluar->nomor_urut + 1 : 1;
+            $lastNomorUrut = SuratKeluar::max('nomor_urut');
+            $newNomorUrut = $lastNomorUrut ? $lastNomorUrut + 1 : 1;
+
+            // Pastikan nomor urut yang baru tidak duplikat
+            while (SuratKeluar::where('nomor_urut', $newNomorUrut)->exists()) {
+                $newNomorUrut++;
+            }
+
+            $model->nomor_urut = $newNomorUrut;
         });
     }
     protected $fillable = [

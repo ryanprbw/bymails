@@ -28,10 +28,11 @@ class SuratMasukController extends Controller
             });
         }
         $role = Auth::user()->role;
-        $suratMasuks = $query->orderBy('nomor_urut', 'desc')->paginate(10);
+        $perPage = request()->input('per_page', 50);
+        $suratMasuks = $query->orderBy('nomor_urut', 'desc')->paginate($perPage);
         $jumlahSuratMasuks = $suratMasuks->total();
 
-        return view('back-end.surat_masuk.index', compact('suratMasuks', 'jumlahSuratMasuks','role'));
+        return view('back-end.surat_masuk.index', compact('suratMasuks', 'jumlahSuratMasuks', 'role'));
     }
 
     /**
