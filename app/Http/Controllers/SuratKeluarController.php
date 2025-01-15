@@ -59,7 +59,7 @@ class SuratKeluarController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nomor_berkas' => 'required|max:12',
+            'nomor_berkas' => 'required|max:100',
             'alamat_penerima' => 'required',
             'tanggal' => 'required|date',
             'perihal' => 'required',
@@ -115,7 +115,7 @@ class SuratKeluarController extends Controller
     public function update(Request $request, SuratKeluar $suratKeluar)
     {
         $validatedData = $request->validate([
-            'nomor_berkas' => 'required|max:12',
+            'nomor_berkas' => 'required|max:100',
             'alamat_penerima' => 'required',
             'tanggal' => 'required|date',
             'perihal' => 'required',
