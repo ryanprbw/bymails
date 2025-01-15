@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SppdController;
 use App\Http\Controllers\SuratKeluarController;
+use App\Http\Controllers\SuratKeputusanController;
 use App\Http\Controllers\SuratMasukController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,7 @@ Route::get('/dashboard', function () {
 
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    
+
     Route::get('/surat_keluar/create', [SuratKeluarController::class, 'create'])->name('surat_keluar.create');
     Route::post('/surat_keluar', [SuratKeluarController::class, 'store'])->name('surat_keluar.store');
     Route::get('/surat_keluar/{suratKeluar}', [SuratKeluarController::class, 'show'])->name('surat_keluar.show');
@@ -45,12 +46,22 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/sppd/{sppd}', [SppdController::class, 'update'])->name('sppd.update');
     Route::delete('/sppd/{sppd}', [SppdController::class, 'destroy'])->name('sppd.destroy');
 
+    Route::get('/surat_keputusan', [SuratKeputusanController::class, 'index'])->name('surat_keputusan.index');
+    Route::get('/surat_keputusan/create', [SuratKeputusanController::class, 'create'])->name('surat_keputusan.create');
+    Route::post('/surat_keputusan', [SuratKeputusanController::class, 'store'])->name('surat_keputusan.store');
+    Route::get('/surat_keputusan/{surat_keputusan}', [SuratKeputusanController::class, 'show'])->name('surat_keputusan.show');
+    Route::get('/surat_keputusan/{surat_keputusan}/edit', [SuratKeputusanController::class, 'edit'])->name('surat_keputusan.edit');
+    Route::put('/surat_keputusan/{surat_keputusan}', [SuratKeputusanController::class, 'update'])->name('surat_keputusan.update');
+    Route::delete('/surat_keputusan/{surat_keputusan}', [SuratKeputusanController::class, 'destroy'])->name('surat_keputusan.destroy');
+    Route::get('/surat_keputusan/{surat_keputusan}/download', [SuratKeputusanController::class, 'download'])->name('surat_keputusan.download');
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('register', [RegisteredUserController::class, 'create'])
-    ->name('register');
+        ->name('register');
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
@@ -124,12 +135,9 @@ Route::middleware('auth')->group(function () {
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::middleware(['user'])->group(function () {
-        
-    });
-
+    Route::middleware(['user'])->group(function () {});
 });
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -9,17 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('surat_masuks', function (Blueprint $table) {
-            $table->id();
-            $table->string('nomor_urut')->unique();
+        Schema::create('surat_keluars', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('nomor_urut')->default(0)->unique();
             $table->string('nomor_berkas', 12);
-            $table->string('alamat_pengirim');
+            $table->string('alamat_penerima');
             $table->date('tanggal');
-            // $table->string('nomor');
             $table->string('perihal');
             $table->timestamps();
+            $table->string('file_path')->nullable();
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('surat_masuks');
+        Schema::dropIfExists('surat_keluars');
     }
 };

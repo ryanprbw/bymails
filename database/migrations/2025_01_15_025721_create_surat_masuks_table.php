@@ -11,22 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('surat_keluars', function (Blueprint $table) {
-            $table->id();
-            $table->string('nomor_urut')->unique();
-            $table->string('nomor_berkas', 12);
-            $table->string('alamat_penerima');
+        Schema::create('surat_masuks', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('nomor_urut')->default(0)->unique();
+            $table->string('nomor_berkas', 20);
+            $table->string('alamat_pengirim');
             $table->date('tanggal');
-            // $table->integer('nomor');
             $table->string('perihal');
             $table->timestamps();
+            $table->string('file_path')->nullable();
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('surat_keluars');
+        Schema::dropIfExists('surat_masuks');
     }
 };

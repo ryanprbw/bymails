@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+        Schema::create('sppd_pegawai', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('sppd_id')->nullable()->index('index 2');
+            $table->unsignedBigInteger('pegawai_id')->nullable()->index('sppd_pegawai_pegawai_id_foreign');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('sppd_pegawai');
     }
 };
