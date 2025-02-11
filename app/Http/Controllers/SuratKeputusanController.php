@@ -10,10 +10,11 @@ class SuratKeputusanController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index(Request $request)
     {
         // Filter untuk pencarian dan paginasi
-        $perPage = $request->get('per_page', 10); // Default 10 per halaman
+        $perPage = $request->get('per_page', 50); // Default 50 per halaman
         $search = $request->get('search');
 
         // Query dengan pencarian
@@ -25,6 +26,9 @@ class SuratKeputusanController extends Controller
                 ->orWhere('tanggal_keputusan', 'like', "%{$search}%");
         }
 
+        // Mengurutkan berdasarkan nomor_urut (dengan CAST untuk memastikan pengurutan numerik)
+        $query->orderBy('nomor_urut', 'desc'); // Urutkan berdasarkan nomor_urut secara menurun (terbesar terlebih dahulu)
+
         // Ambil data dengan paginasi
         $suratKeputusan = $query->paginate($perPage);
 
@@ -32,11 +36,17 @@ class SuratKeputusanController extends Controller
         return view('back-end.surat_keputusan.index', compact('suratKeputusan'));
     }
 
+
+
+
+
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
+        $lastNomorUrut = SuratKeputusan::max('nomor_urut') ?? 0;
         return view('back-end.surat_keputusan.create');
     }
 

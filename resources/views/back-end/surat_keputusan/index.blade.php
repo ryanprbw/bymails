@@ -62,9 +62,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($suratKeputusan as $key => $sk)
+                        @foreach ($suratKeputusan as $key => $sk)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <td class="px-6 py-4">{{ $key + 1 }}</td>
+                                <td class="px-6 py-4">{{ $sk->nomor_urut }}</td>
+                                <!-- Nomor urut yang benar -->
                                 <td class="px-6 py-4">{{ $sk->nomor_surat }}</td>
                                 <td class="px-6 py-4">{{ $sk->tanggal_surat }}</td>
                                 <td class="px-6 py-4">{{ $sk->perihal }}</td>
@@ -83,14 +84,17 @@
                                     </form>
                                 </td>
                             </tr>
-                        @empty
+                        @endforeach
+                        @if ($suratKeputusan->isEmpty())
                             <tr>
                                 <td colspan="6" class="px-6 py-4 text-center text-gray-500">
                                     Tidak ada data Surat Keputusan.
                                 </td>
                             </tr>
-                        @endforelse
+                        @endif
                     </tbody>
+
+
                 </table>
                 <div class="mt-4">
                     {{ $suratKeputusan->links() }}
