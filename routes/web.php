@@ -9,6 +9,8 @@ use App\Http\Controllers\SppdController;
 use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\SuratKeputusanController;
 use App\Http\Controllers\SuratMasukController;
+use App\Http\Controllers\SopController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -55,6 +57,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/surat_keputusan/{surat_keputusan}', [SuratKeputusanController::class, 'destroy'])->name('surat_keputusan.destroy');
     Route::get('/surat_keputusan/{surat_keputusan}/download', [SuratKeputusanController::class, 'download'])->name('surat_keputusan.download');
 
+
+    Route::resource('sops', SopController::class);
+    Route::get('/sop/create', [SuratKeluarController::class, 'create'])->name('sop.create');
+    Route::post('/sop', [SuratKeluarController::class, 'store'])->name('sop.store');
+    Route::get('/sop/{suratKeluar}', [SuratKeluarController::class, 'show'])->name('sop.show');
+    Route::get('/sop/{suratKeluar}/edit', [SuratKeluarController::class, 'edit'])->name('sop.edit');
+    Route::put('/sop/{suratKeluar}', [SuratKeluarController::class, 'update'])->name('sop.update');
+    Route::delete('/sop/{suratKeluar}', [SuratKeluarController::class, 'destroy'])->name('sop.destroy');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -135,7 +145,7 @@ Route::middleware('auth')->group(function () {
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::middleware(['user'])->group(function () {});
+    Route::middleware(['user'])->group(function () { });
 });
 
 
