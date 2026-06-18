@@ -59,12 +59,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 
     Route::resource('sops', SopController::class);
-    Route::get('/sop/create', [SuratKeluarController::class, 'create'])->name('sop.create');
-    Route::post('/sop', [SuratKeluarController::class, 'store'])->name('sop.store');
-    Route::get('/sop/{suratKeluar}', [SuratKeluarController::class, 'show'])->name('sop.show');
-    Route::get('/sop/{suratKeluar}/edit', [SuratKeluarController::class, 'edit'])->name('sop.edit');
-    Route::put('/sop/{suratKeluar}', [SuratKeluarController::class, 'update'])->name('sop.update');
-    Route::delete('/sop/{suratKeluar}', [SuratKeluarController::class, 'destroy'])->name('sop.destroy');
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

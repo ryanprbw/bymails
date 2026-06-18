@@ -15,7 +15,12 @@ class SopController extends Controller
     {
         $sops = Sop::latest()->paginate(10);
 
-        return view('back-end.sop.index', compact('sops'));
+        $jumlahSop = $sops->total();
+
+        return view('back-end.sop.index', compact(
+            'sops',
+            'jumlahSop'
+        ));
     }
 
     /**
@@ -55,7 +60,7 @@ class SopController extends Controller
         Sop::create($validated);
 
         return redirect()
-            ->route('back-end.sop.create')
+            ->route('sops.index')
             ->with('success', 'Data SOP berhasil ditambahkan.');
     }
 
@@ -64,7 +69,7 @@ class SopController extends Controller
      */
     public function show(Sop $sop)
     {
-        return view('sops.show', compact('sop'));
+        return view('back-end.sop.show', compact('sop'));
     }
 
     /**
@@ -72,7 +77,7 @@ class SopController extends Controller
      */
     public function edit(Sop $sop)
     {
-        return view('sops.edit', compact('sop'));
+        return view('back-end.sop.edit', compact('sop'));
     }
 
     /**
