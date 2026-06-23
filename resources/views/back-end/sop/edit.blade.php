@@ -90,6 +90,9 @@
                                     <option value="CAPIL" {{ $sop->bidang == 'CAPIL' ? 'selected' : '' }}>
                                         CAPIL
                                     </option>
+                                    <option value="PDIP" {{ $sop->bidang == 'PDIP' ? 'selected' : '' }}>
+                                        PDIP
+                                    </option>
 
                                 </select>
                             </div>
@@ -150,7 +153,7 @@
                         </div>
 
                         <button type="submit"
-                            class="inline-flex items-center px-5 py-2.5 mt-4 text-sm font-medium text-white bg-yellow-600 rounded-lg hover:bg-yellow-700">
+                            class="inline-flex items-center px-5 py-2.5 mt-4 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-yellow-700">
                             Update SOP
                         </button>
 
