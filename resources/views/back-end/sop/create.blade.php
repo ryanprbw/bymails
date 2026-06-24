@@ -94,7 +94,7 @@
                                     <option value="DAFDUK">DAFDUK</option>
                                     <option value="PIAK">PIAK</option>
                                     <option value="CAPIL">CAPIL</option>
-                                    <option value="CAPIL">PDIP</option>
+                                    <option value="PDIP">PDIP</option>
 
                                 </select>
 

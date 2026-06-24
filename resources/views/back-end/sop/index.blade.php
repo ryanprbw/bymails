@@ -1,4 +1,3 @@
-```blade
 <x-app-layout>
     <x-slot name="header">
     </x-slot>
@@ -20,7 +19,7 @@
             <div class="flex justify-between items-center mb-4">
 
                 <a href="{{ route('sops.create') }}"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                    class="animate-bounce text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
                     Tambah SOP
                 </a>
 

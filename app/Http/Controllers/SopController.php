@@ -11,9 +11,26 @@ class SopController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $sops = Sop::latest()->paginate(10);
+        $request->validate([
+            'search' => 'nullable|string|max:255',
+        ]);
+
+        $sops = Sop::query()
+
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $search = $request->search;
+
+                $query->where(function ($q) use ($search) {
+                    $q->where('nama_sop', 'like', "%{$search}%")
+                        ->orWhere('nomor_sop', 'like', "%{$search}%");
+                });
+            })
+
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
 
         $jumlahSop = $sops->total();
 

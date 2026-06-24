@@ -28,7 +28,7 @@
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div class="flex justify-between items-center mb-4">
                 <a href="{{ route('surat_keputusan.create') }}"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    class="animate-bounce text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     Tambah Surat Keputusan
                 </a>
                 <form method="GET" action="{{ url()->current() }}" class="flex items-center space-x-4">
